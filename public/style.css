@@ -63,11 +63,33 @@
             background-color: #5952d4;
         }
   
-        .login .signup-link a {
+
+        .login .signup a {
             color: #6c63ff;
             text-decoration: none;
         }
 
-        .login .signup-link a:hover {
+        .login .signup a:hover {
             text-decoration: underline;
         }
+
+        .login .signup {
+                margin-top: 18px;
+            text-align: center;
+            font-size: 14px;
+            color: #777;
+        }
+
+        .forgot-pw {
+             text-align: center;
+             
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        .forgot-pw a {
+            text-decoration: none;
+        }
+   .forgot-pw a:hover{
+            text-decoration: underline;
+        }
+        
