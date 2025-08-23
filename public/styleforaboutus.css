@@ -109,7 +109,7 @@ p {
 
 
 .btn {
-    background: #333;
+    background: rgba(0, 150, 136, 0.95);
     color: white;
     border: none;
     padding: 10px 25px;
