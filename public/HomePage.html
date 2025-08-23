@@ -1,10 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HomePage</title>
-    <style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cloud Kitchen</title>
+  <style>
     * {
       margin: 0;
       padding: 0;
@@ -13,20 +14,24 @@
 
     body {
       font-family: 'Playfair Display', serif;
-      background: #f7f3ef;
-      color: #333;
+      background: #e0f7fa;
+      color: #004d40;
     }
+
     nav {
       position: sticky;
+      top: 0;
       width: 100%;
-      height: 70px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      -webkit-backdrop-filter: blur(10px);
-      backdrop-filter: blur(10px);
-      background: linear-gradient(135deg, rgba(7, 226, 255, 0.9), rgba(255, 34, 244, 0.9));
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      padding: 0 50px;
+      height: 70px;
+      background: rgba(0, 150, 136, 0.95);
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      border-bottom: 2px solid #009688;
       z-index: 1000;
     }
 
@@ -37,20 +42,18 @@
       letter-spacing: 2px;
       text-decoration: none;
       transition: transform 0.3s;
-      padding-left:30px;
     }
 
     .brand-name:hover {
       transform: scale(1.1);
     }
 
-    .links {
+    .links-box {
       display: flex;
       gap: 35px;
-      padding-right:30px;
     }
 
-    .link {
+    .links {
       position: relative;
       text-decoration: none;
       font-size: 1.1rem;
@@ -60,18 +63,149 @@
       padding: 5px 0;
     }
 
-    </style>
+    .links::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background: #004d40;
+      transition: width 0.3s ease;
+    }
+
+    .links:hover {
+      color: #80deea;
+      transform: translateY(-2px);
+    }
+
+    .links:hover::after {
+      width: 100%;
+    }
+
+    .front-data-excite {
+      width: 95%;
+      max-width: 1600px;
+      height: 670px;
+      margin: 40px auto;
+      background: url('images/front.jpg') center/cover no-repeat;
+      border-radius: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .GlassKoMain {
+      background: rgba(0, 77, 64, 0.25);
+      border-radius: 25px;
+      padding: 40px;
+      -webkit-backdrop-filter: blur(4px);
+      backdrop-filter: blur(4px);
+      text-align: center;
+      color: #e0f7fa;
+      max-width: 700px;
+    }
+
+    .GlassKoMain h1 {
+      font-size: 3rem;
+      margin-bottom: 15px;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.5);
+    }
+
+    .GlassKoMain p {
+      font-size: 1.2rem;
+      text-shadow: 1px 1px 5px rgba(0,0,0,0.4);
+      margin-bottom: 30px;
+    }
+
+    .order-buton {
+      position: relative;
+      display: inline-block;
+      padding: 14px 40px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #e0f7fa;
+      background: transparent;
+      border: 2px solid transparent;
+      border-radius: 50px;
+      cursor: pointer;
+      overflow: hidden;
+      transition: all 0.4s ease;
+      z-index: 1;
+    }
+
+    .order-buton::before {
+      content: "";
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(270deg, #004d40, #009688, #26c6da, #004d40);
+      background-size: 300% 300%;
+      border-radius: 50px;
+      z-index: -1;
+      animation: borderFlow 4s linear infinite;
+    }
+
+    .order-buton::after {
+      content: "";
+      position: absolute;
+      inset: 2px;
+      background: rgba(0,0,0,0.3);
+      border-radius: 50px;
+      z-index: -1;
+      transition: all 0.45s ease;
+    }
+
+    .order-buton:hover {
+      color: #004d40;
+    }
+
+    .order-buton:hover::after {
+      background: #e0f7fa;
+    }
+
+    @keyframes borderFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    
+    
+  </style>
 </head>
 <body>
-    <nav>
-    <a href="HomePage.html" class="brand-name">Alkyne</a>
-    <div class="links">
-      <a href="HomePage.html" class="link">Home</a>
-      <a href="order.html" class="link">Order</a>
-      <a href="register.html" class="link">Register</a>
-      <a href="aboutus.html" class="link">About us</a>
+  <nav>
+    <a href="HomePage.html" class="brand-name">Aafano Khaja</a>
+    <div class="links-box">
+      <a href="HomePage.html" class="links">Home</a>
+      <a href="order.html" class="links">Order</a>
+      <a href="register.html" class="links">Register</a>
+      <a href="aboutus.html" class="links">About us</a>
     </div>
   </nav>
-    
+
+
+
+
+  <section class="front-data-excite">
+    <div class="GlassKoMain">
+      <h1>Welcome to Aafano Khaja</h1>
+      <p>Discover authentic Nepali flavors delivered from traditional kitchens straight to your home.</p>
+      <button class="order-buton" onclick="redirect()">Order Now</button>
+    </div>
+  </section>
+
+
+
+  <script>
+    function redirect() {
+      location.href = "order.html";
+    }
+  </script>
 </body>
 </html>
