@@ -330,6 +330,9 @@
       <p class="price">Rs. 150</p>
       <button class="Ordering_button">Order</button>
     </div>
+
+
+
     <div class="boxes_to_Do" data-food="dhido" data-price="250">
       <img src="images/dhedo.png" alt="Dhido">
       <h3>Dhido</h3>
@@ -337,6 +340,8 @@
       <p class="price">Rs. 250</p>
       <button class="Ordering_button">Order</button>
     </div>
+
+
     <div class="boxes_to_Do" data-food="phapar" data-price="120">
       <img src="images/phapar.png" alt="Phapar ko Roti">
       <h3>Phapar ko Roti</h3>
@@ -344,6 +349,9 @@
       <p class="price">Rs. 120</p>
       <button class="Ordering_button">Order</button>
     </div>
+
+
+
     <div class="boxes_to_Do" data-food="choila" data-price="300">
       <img src="images/chic.png" alt="Chicken Choila">
       <h3>Chicken Choila</h3>
@@ -380,6 +388,9 @@
       <button class="Ordering_button">Order</button>
     </div>
   </section>
+
+
+  
 
   <section class="Cart">
     <h2>Your Cart</h2>
@@ -418,12 +429,16 @@
   let total_cost = 0;
   let loco = {};
 
+
+
   document.querySelectorAll(".Ordering_button").forEach(button => {
     const boxes_to_Do = button.closest(".boxes_to_Do");
     const foodName = boxes_to_Do.querySelector("h3").innerText
     const price = parseInt(boxes_to_Do.dataset.price)
     button.setAttribute("onclick", `addToCart("${foodName}", ${price})`)
   });
+
+
 
   function addToCart(food, price) {
     if (!Cart[food]) {

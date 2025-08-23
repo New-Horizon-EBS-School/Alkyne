@@ -19,9 +19,9 @@
         <form>
             <input type="email" placeholder="Email Address" id="email" required>
             <input type="password" placeholder="Password" id ="password" required>
-            <!-- <div class="error">
-                <p class=>&#9888; Invalid Password. Renter!</p>
-            </div> -->
+            <div class="error">
+                <p></p>
+            </div> 
 
             <div class="forgot-pw">
                 <a href="#">Forgot Password?</a>
@@ -55,7 +55,7 @@
             if (data.success) {
                 window.location.href = "/home.html";
             } else {
-                document.getElementById("msg").innerText = data.message;
+                document.getElementById("msg").innerText = "&#9888; Invalid Password. Renter!";
             }
         }
     </script>
