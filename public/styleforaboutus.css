@@ -1,0 +1,126 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+
+
+
+
+nav {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 50px;
+      height: 70px;
+      background: rgba(0, 150, 136, 0.95);
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      border-bottom: 2px solid #009688;
+      z-index: 1000;
+    }
+
+    .brand-name {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #e0f7fa;
+      letter-spacing: 2px;
+      text-decoration: none;
+      transition: transform 0.3s;
+    }
+
+    .brand-name:hover {
+      transform: scale(1.1);
+    }
+
+    .links-box {
+      display: flex;
+      gap: 35px;
+    }
+
+    .links {
+      position: relative;
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: #e0f7fa;
+      transition: color 0.3s ease, transform 0.2s;
+      padding: 5px 0;
+    }
+
+    .links::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background: #004d40;
+      transition: width 0.3s ease;
+    }
+
+    .links:hover {
+      color: #80deea;
+      transform: translateY(-2px);
+    }
+
+    .links:hover::after {
+      width: 100%;
+    }
+
+
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 50px 20px;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #fff;
+    color: #333;
+    text-align: center;
+}
+
+
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 30px;
+    line-height: 1.5;
+}
+
+
+.btn {
+    background: #333;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: 0.3s;
+    text-decoration: none;
+}
+
+.btn:hover {
+    background: #555;
+}
+

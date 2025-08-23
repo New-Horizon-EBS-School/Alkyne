@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +13,7 @@
     }
 
     body {
-      font-family: 'Playfair Display', serif;
+      font-family: Arial, sans-serif;
       background: #e0f7fa;
       color: #004d40;
     }
@@ -28,7 +29,7 @@
       -webkit-backdrop-filter: blur(8px);
       backdrop-filter: blur(8px);
       background: rgba(0, 150, 136, 0.95);
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
       z-index: 1000;
       padding: 0 50px;
       border-bottom: 2px solid #009688;
@@ -211,9 +212,17 @@
     }
 
     @keyframes borderFlow {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
     }
 
     .Cart {
@@ -236,7 +245,8 @@
       border-collapse: collapse;
     }
 
-    .Cart th, .Cart td {
+    .Cart th,
+    .Cart td {
       padding: 12px;
       text-align: center;
       border-bottom: 1px solid #ccc;
@@ -292,6 +302,7 @@
     }
   </style>
 </head>
+
 <body>
   <nav>
     <a href="index.html" class="brand-name">ARFoods</a>
@@ -392,7 +403,7 @@
   </section>
 
 
-  
+
 
   <section class="Cart">
     <h2>Your Cart</h2>
@@ -421,46 +432,46 @@
 
 
   <script>
-  const filter = document.getElementById("food-filter");
-  const boxes_to_Dos = document.querySelectorAll(".boxes_to_Do");
-  const container = document.querySelector(".boxes_to_Dos-container");
-  const CartBody = document.getElementById("Cart-body");
-  const CartTotal = document.getElementById("Cart-total")
+    const filter = document.getElementById("food-filter");
+    const boxes_to_Dos = document.querySelectorAll(".boxes_to_Do");
+    const container = document.querySelector(".boxes_to_Dos-container");
+    const CartBody = document.getElementById("Cart-body");
+    const CartTotal = document.getElementById("Cart-total")
 
-  let Cart = {};
-  let total_cost = 0;
-  let loco = {};
+    let Cart = {};
+    let total_cost = 0;
+    let loco = {};
 
   
 
-  document.querySelectorAll(".Ordering_button").forEach(button => {
-    const boxes_to_Do = button.closest(".boxes_to_Do");
-    const foodName = boxes_to_Do.querySelector("h3").innerText
-    const price = parseInt(boxes_to_Do.dataset.price)
-    button.setAttribute("onclick", `addToCart("${foodName}", ${price})`)
-  });
+    document.querySelectorAll(".Ordering_button").forEach(button => {
+      const boxes_to_Do = button.closest(".boxes_to_Do");
+      const foodName = boxes_to_Do.querySelector("h3").innerText
+      const price = parseInt(boxes_to_Do.dataset.price)
+      button.setAttribute("onclick", `addToCart("${foodName}", ${price})`)
+    });
 
 
 
-  function addToCart(food, price) {
-    if (!Cart[food]) {
-      Cart[food] = { quantity: 1, total: price };
-    } else {
-      Cart[food].quantity += 1;
-      Cart[food].total += price;
+    function addToCart(food, price) {
+      if (!Cart[food]) {
+        Cart[food] = { quantity: 1, total: price };
+      } else {
+        Cart[food].quantity += 1;
+        Cart[food].total += price;
+      }
+      updateCart();
     }
-    updateCart();
-  }
 
-  function updateCart() {
-    CartBody.innerHTML = ""
-    total_cost = 0;
+    function updateCart() {
+      CartBody.innerHTML = ""
+      total_cost = 0;
 
-    for (let food in Cart) {
-      const item = Cart[food];
-      const unitPrice = item.total / item.quantity;
-      total_cost += item.total;
-
+      for (let food in Cart) {
+        const item = Cart[food];
+        const unitPrice = item.total / item.quantity;
+        total_cost += item.total;
+  
       CartBody.innerHTML += `
         <tr>
           <td>${food}</td>
@@ -471,54 +482,54 @@
       `;
     }
 
+      CartTotal.innerText = `Total: Rs. ${total_cost}`
+    }
 
-    CartTotal.innerText = `Total: Rs. ${total_cost}`
-  }
+    function Clear() {
+      SENDDATA();
+      Cart = {}
+      updateCart();
+    }
 
-  function Clear() {
-    SENDDATA();
-    Cart = {}
-    updateCart();
-  }
+    function getLoc() {
+      navigator.geolocation.getCurrentPosition(pos => {
+        loco = { lat: pos.coords.latitude, long: pos.coords.longitude };
+      })
+    }
 
-  function getLoc() {
-    navigator.geolocation.getCurrentPosition(pos => {
-      loco = {  lat: pos.coords.latitude,long: pos.coords.longitude };
+
+
+    getLoc();
+
+
+
+
+    async function SENDDATA() {
+      const data = { message: Cart, Final: total_cost, location: loco };
+      await fetch("/api/order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+    }
+
+    filter.addEventListener("change", () => {
+      const value = filter.value
+      let visibleboxes_to_Dos = 0
+
+      boxes_to_Dos.forEach(boxes_to_Do => {
+        if (value === "all" || boxes_to_Do.dataset.food === value) {
+          boxes_to_Do.style.display = "block"
+          visibleboxes_to_Dos++;
+        } else {
+          boxes_to_Do.style.display = "none";
+        }
+      });
+
+      if (visibleboxes_to_Dos === 1) container.classList.add("single-boxes_to_Do")
+      else container.classList.remove("single-boxes_to_Do")
     })
-  }
-
-
-
-  getLoc();
-
-
-
-
-  async function SENDDATA() {
-    const data = { message: Cart, Final: total_cost, location: loco };
-    await fetch("/api/order", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data)
-    });
-  }
-
-  filter.addEventListener("change", () => {
-    const value = filter.value
-    let visibleboxes_to_Dos = 0
-
-    boxes_to_Dos.forEach(boxes_to_Do => {
-      if (value === "all" || boxes_to_Do.dataset.food === value) {
-        boxes_to_Do.style.display = "block"
-        visibleboxes_to_Dos++;
-      } else {
-        boxes_to_Do.style.display = "none";
-      }
-    });
-
-    if (visibleboxes_to_Dos === 1) container.classList.add("single-boxes_to_Do")
-    else container.classList.remove("single-boxes_to_Do")
-  })
   </script>
 </body>
+
 </html>

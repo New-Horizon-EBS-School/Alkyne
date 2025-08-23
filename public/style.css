@@ -27,7 +27,9 @@
       padding: 12px;
       border: none;
       border-radius: 8px;
-      background-color: #6c63ff;
+      /* background-color: #6c63ff; */
+      background-color: rgba(0, 150, 136, 0.95);
+      ;
       color: #fff;
       font-size: 16px;
       cursor: pointer;
@@ -54,54 +56,61 @@
       border-radius: 8px;
       font-size: 16px;
 
-        /* padding: 12px 15px; */
-            /* margin-bottom: 20px; */
-            /* border: 1px solid #ddd; */   
+      /* padding: 12px 15px; */
+      /* margin-bottom: 20px; */
+      /* border: 1px solid #ddd; */
   }
 
- .login button:hover {
-            background-color: #5952d4;
-        }
-  
+  .login button:hover {
+      /* background-color: #5952d4; */
+      background-color: rgba(3, 119, 107, 0.95);
+      ;
+  }
 
-        .login .signup a {
-            color: #6c63ff;
-            text-decoration: none;
-        }
 
-        .login .signup a:hover {
-            text-decoration: underline;
-        }
+  .login .signup a {
+      color: #6c63ff;
+      /* color: rgba(0, 150, 136, 0.95);; */
+      text-decoration: none;
+  }
 
-        .login .signup {
-                margin-top: 18px;
-            text-align: center;
-            font-size: 14px;
-            color: #777;
-        }
+  .login .signup a:hover {
+      text-decoration: underline;
+  }
 
-        .forgot-pw {
-             text-align: center;
-             
-            font-size: 14px;
-            margin-bottom: 20px;
-        }
-        .forgot-pw a {
-            text-decoration: none;
-        }
-   .forgot-pw a:hover{
-            text-decoration: underline;
-        }
-        
+  .login .signup {
+      margin-top: 18px;
+      text-align: center;
+      font-size: 14px;
+      color: #777;
+  }
 
-          .login input:focus {
-            border: 2px solid #6c63ff;
-            outline: none;
-            box-shadow: 0 0 5px rgba(108, 99, 255, 0.3);
-        }
+  .forgot-pw {
+      text-align: center;
 
-        .error p {
-            color: red;
-            font-size: 14px;
-            text-align: center;
-        }
+      font-size: 14px;
+      margin-bottom: 20px;
+  }
+
+  .forgot-pw a {
+      text-decoration: none;
+      color: rgba(3, 121, 110, 0.95);
+  }
+
+  .forgot-pw a:hover {
+      text-decoration: underline;
+  }
+
+
+  .login input:focus {
+      /* border: 2px solid #6c63ff; */
+      border: 2px solid rgba(0, 150, 136, 0.95);
+      outline: none;
+      box-shadow: 0 0 5px rgba(108, 99, 255, 0.3);
+  }
+
+  .error p {
+      color: red;
+      font-size: 14px;
+      text-align: center;
+  }
