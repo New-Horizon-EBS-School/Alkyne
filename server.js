@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const fs = require("fs");
 
+
 const port = 8080;
 const app = express();
 
@@ -11,7 +12,9 @@ const app = express();
 app.use(express.json());
 
 
+
 app.use(express.static(path.join(__dirname,"public")));
+
 
 
 
@@ -26,13 +29,21 @@ function readUsers() {
 }
 
 
+
+
 function saveUsers(users) {
   fs.writeFileSync(path.join(__dirname, "userslogindata.json"), JSON.stringify(users, null, 2));
 }
 
+
+
+
 app.post("/api/oldusers", (req, res) => {
   const { name, password } = req.body;
   const users = readUsers();
+
+
+  console.log(name,password);
 
   const user = users.find(u => u.name === name && u.password === password);
 
@@ -44,11 +55,17 @@ app.post("/api/oldusers", (req, res) => {
 });
 
 
-app.post("/api/oldusers", (req, res) => {
+
+
+
+
+app.post("/api/newusers", (req, res) => {
   const { name, password } = req.body;
+  console.log(name,password);
   const users = readUsers();
 
 
+    
 
 
   if (users.find(u => u.name === name)) {
@@ -58,10 +75,14 @@ app.post("/api/oldusers", (req, res) => {
 
   users.push({ name, password });
 
+
+
   saveUsers(users);
 
   res.json({ success: true, message: "Signup successful! You can now login." });
 });
+
+
 
 
 app.listen(port, () => {

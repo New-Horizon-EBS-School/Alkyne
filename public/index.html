@@ -20,7 +20,7 @@
             <input type="email" placeholder="Email Address" id="email" required>
             <input type="password" placeholder="Password" id ="password" required>
             <div class="error">
-                <p></p>
+                <p id="msg"></p>
             </div> 
 
             <div class="forgot-pw">
@@ -50,6 +50,7 @@
                 headers:{"Content-Type":"application/json"},
                 body : JSON.stringify(data)
             });
+
 
             const data = await response.json();
             if (data.success) {
