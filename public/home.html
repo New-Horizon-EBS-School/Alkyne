@@ -4,8 +4,74 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HomePage</title>
+    <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Playfair Display', serif;
+      background: #f7f3ef;
+      color: #333;
+    }
+    nav {
+      position: sticky;
+      width: 100%;
+      height: 70px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      background: linear-gradient(135deg, rgba(7, 226, 255, 0.9), rgba(255, 34, 244, 0.9));
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+    }
+
+    .brand-name {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #e0f7fa;
+      letter-spacing: 2px;
+      text-decoration: none;
+      transition: transform 0.3s;
+      padding-left:30px;
+    }
+
+    .brand-name:hover {
+      transform: scale(1.1);
+    }
+
+    .links-box {
+      display: flex;
+      gap: 35px;
+      padding-right:30px;
+    }
+
+    .links {
+      position: relative;
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: #e0f7fa;
+      transition: color 0.3s ease, transform 0.2s;
+      padding: 5px 0;
+    }
+
+    </style>
 </head>
 <body>
-    <!-- hero icon -->
+    <nav>
+    <a href="try.html" class="brand-name">Alkyne</a>
+    <div class="links-box">
+      <a href="try.html" class="links">Home</a>
+      <a href="try3.html" class="links">Order</a>
+      <a href="try2.html" class="links">Register</a>
+      <p class="links">About us</p>
+    </div>
+  </nav>
+    
 </body>
 </html>
