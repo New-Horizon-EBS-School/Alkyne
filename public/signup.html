@@ -1,21 +1,22 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SignInPage</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 
-     <div class="login">
+    <div class="login">
         <h2>Sign In</h2>
         <form>
 
-            <input type="email" placeholder="Email Address" id ="email"required>
-            <input type="password" placeholder="Password" id ="password" required>
+            <input type="email" placeholder="Email Address" id="email" required>
+            <input type="password" placeholder="Password" id="password" required>
             <div class="forgot-pw">
 
                 <a href="#">Forgot Password?</a>
@@ -25,23 +26,23 @@
 
         </form>
         <div class="signup">
-            Already have an account? <a href="index.html" id ="signupwalapage">Sign Up</a>
+            Already have an account? <a href="index.html" id="signupwalapage">Sign Up</a>
         </div>
     </div>
 
     <script>
-        document.getElementById("signwalapage").addEventListener("click",()=>{
+        document.getElementById("signwalapage").addEventListener("click", () => {
             var email = document.getElementById("email").value;
             var password = document.getElementById("email").value;
 
-            send_the_data_of_gmail_and_password(email,password);
-            
+            send_the_data_of_gmail_and_password(email, password);
+
         });
 
-        async function send_the_data_of_gmail_and_password(email,password) {
-            await fetch("/api/newusers",{
-                method : "POST",
-                headers:{""}
+        async function send_the_data_of_gmail_and_password(email, password) {
+            await fetch("/api/newusers", {
+                method: "POST",
+                headers: { ""}
             });
         }
     </script>
@@ -51,4 +52,5 @@
 
 
 </body>
+
 </html>
