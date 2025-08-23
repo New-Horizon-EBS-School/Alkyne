@@ -117,10 +117,11 @@
     .box-container {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
+      gap: 60px;
       max-width: 1200px;
       margin: 20px auto 60px;
       padding: 0 20px;
+
     }
 
     .boxes_to_Do {
@@ -333,7 +334,7 @@
 
 
 
-  <section class="box-container">
+  <section class="box-container single-boxes_to_Do">
     <div class="boxes_to_Do" data-food="kheer" data-price="150">
       <img src="images/kheer.png" alt="Kheer">
       <h3>Kheer</h3>
@@ -526,8 +527,10 @@
         }
       });
 
-      if (visibleboxes_to_Dos === 1) container.classList.add("single-boxes_to_Do")
-      else container.classList.remove("single-boxes_to_Do")
+      if (visibleboxes_to_Dos != 1) {
+        container.classList.remove("single-boxes_to_Do")
+      }
+
     })
   </script>
 </body>
