@@ -21,28 +21,39 @@
                 <a href="#">Forgot Password?</a>
 
             </div>
-            <button type="submit">Create an account</button>
+            <button type="submit" id ="sumit">Create an account</button>
 
         </form>
         <div class="signup-link">
-            Already have an account? <a href="index.html" id ="signupwalapage">Sign Up</a>
+            Already have an account? <a href="index.html" >Sign Up</a>
         </div>
     </div>
 
     <script>
-        document.getElementById("signwalapage").addEventListener("click",()=>{
+        document.getElementById("sumit").addEventListener("click",()=>{
             var email = document.getElementById("email").value;
-            var password = document.getElementById("email").value;
-
-            send_the_data_of_gmail_and_password(email,password);
+            var password = document.getElementById("password").value;
+            const data={
+                email:email,
+                password:password
+            }
+            send_the_data_of_gmail_and_password(data);
             
         });
 
-        async function send_the_data_of_gmail_and_password(email,password) {
+        async function send_the_data_of_gmail_and_password(data) {
             await fetch("/api/newusers",{
                 method : "POST",
-                headers:{""}
+                headers:{"Content-Type":"application/json"},
+                body : JSON.stringify(data)
             });
+
+            const data = await response.json();
+            if (data.success) {
+                window.location.href = "/index.html";
+            } else {
+                document.getElementById("msg").innerText = data.message;
+            }
         }
     </script>
 

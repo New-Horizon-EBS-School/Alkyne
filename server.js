@@ -15,6 +15,51 @@ app.use(express.static(path.join(__dirname,"public")));
 
 
 
+function readUsers() {
+  try {
+    const data = fs.readFileSync(path.join(__dirname, "users.json"), "utf8");
+    return JSON.parse(data);
+  } catch (err) {
+    console.error("Error reading users file:", err);
+    return [];
+  }
+}
+
+
+function saveUsers(users) {
+  fs.writeFileSync(path.join(__dirname, "users.json"), JSON.stringify(users, null, 2));
+}
+
+app.post("/api/login", (req, res) => {
+  const { name, password } = req.body;
+  const users = readUsers();
+
+  const user = users.find(u => u.name === name && u.password === password);
+
+  if (user) {
+    res.json({ success: true });
+  } else {
+    res.json({ success: false, message: "Invalid username or password" });
+  }
+});
+
+
+app.post("/api/signup", (req, res) => {
+  const { name, password } = req.body;
+  const users = readUsers();
+
+
+
+  if (users.find(u => u.name === name)) {
+    return res.json({ success: false, message: "Username already exists" });
+  }
+
+  users.push({ name, password });
+  saveUsers(users);
+
+  res.json({ success: true, message: "Signup successful! You can now login." });
+});
+
 
 app.listen(port, () => {
     console.log(`The site is available at http://localhost:${port}`);
