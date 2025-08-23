@@ -19,13 +19,10 @@ app.use(express.static(path.join(__dirname,"public")));
 
 
 function readUsers() {
-  try {
+
     const data = fs.readFileSync(path.join(__dirname, "userslogindata.json"), "utf8");
     return JSON.parse(data);
-  } catch (err) {
-    console.error("Error reading users file:", err);
-    return [];
-  }
+  
 }
 
 
@@ -43,6 +40,7 @@ app.post("/api/oldusers", (req, res) => {
   const users = readUsers();
 
 
+  
   console.log(name,password);
 
   const user = users.find(u => u.name === name && u.password === password);
@@ -65,7 +63,7 @@ app.post("/api/newusers", (req, res) => {
   const users = readUsers();
 
 
-    
+
 
 
   if (users.find(u => u.name === name)) {
