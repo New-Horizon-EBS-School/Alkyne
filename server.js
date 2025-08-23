@@ -17,7 +17,7 @@ app.use(express.static(path.join(__dirname,"public")));
 
 function readUsers() {
   try {
-    const data = fs.readFileSync(path.join(__dirname, "users.json"), "utf8");
+    const data = fs.readFileSync(path.join(__dirname, "userslogindata.json"), "utf8");
     return JSON.parse(data);
   } catch (err) {
     console.error("Error reading users file:", err);
@@ -27,10 +27,10 @@ function readUsers() {
 
 
 function saveUsers(users) {
-  fs.writeFileSync(path.join(__dirname, "users.json"), JSON.stringify(users, null, 2));
+  fs.writeFileSync(path.join(__dirname, "userslogindata.json"), JSON.stringify(users, null, 2));
 }
 
-app.post("/api/login", (req, res) => {
+app.post("/api/oldusers", (req, res) => {
   const { name, password } = req.body;
   const users = readUsers();
 
@@ -44,9 +44,10 @@ app.post("/api/login", (req, res) => {
 });
 
 
-app.post("/api/signup", (req, res) => {
+app.post("/api/oldusers", (req, res) => {
   const { name, password } = req.body;
   const users = readUsers();
+
 
 
 
@@ -54,7 +55,9 @@ app.post("/api/signup", (req, res) => {
     return res.json({ success: false, message: "Username already exists" });
   }
 
+
   users.push({ name, password });
+
   saveUsers(users);
 
   res.json({ success: true, message: "Signup successful! You can now login." });
