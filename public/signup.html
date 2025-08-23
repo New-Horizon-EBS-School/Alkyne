@@ -28,6 +28,8 @@
         <div class="signup">
             Already have an account? <a href="index.html" >Log In</a>
         </div>
+
+
     </div>
 
     <script>
@@ -35,16 +37,30 @@
             var email = document.getElementById("email").value;
             var password = document.getElementById("email").value;
 
-            send_the_data_of_gmail_and_password(email,password);
+
+            const data={
+                email:email,
+                password:password
+            }
+            send_the_data_of_gmail_and_password(data);
             
         });
 
-        async function send_the_data_of_gmail_and_password(email,password) {
+        async function send_the_data_of_gmail_and_password(data) {
             await fetch("/api/newusers",{
                 method : "POST",
-                headers:{""}
+                headers:{"Content-Type":"application/json"},
+                body : JSON.stringify(data)
             });
-        }
+
+            const data = await response.json();
+            if (data.success) {
+                window.location.href = "/home.html";
+            } else {
+                document.getElementById("msg").innerText = "&#9888; Invalid Password. Renter!";
+            }
+            };
+        
     </script>
 
 

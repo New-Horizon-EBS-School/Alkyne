@@ -305,11 +305,11 @@
 
 <body>
   <nav>
-    <a href="index.html" class="brand-name">Aafano Khaja</a>
+    <a href="index.html" class="brand-name">ARFoods</a>
     <div class="links-box">
       <a href="index.html" class="links">Home</a>
-      <a href="try3.html" class="links">Order</a>
-      <a href="try2.html" class="links">Register</a>
+      <a href="order.html" class="links">Order</a>
+      <a href="register.html" class="links">Register</a>
       <p class="links">About us</p>
     </div>
   </nav>
@@ -391,6 +391,8 @@
       <p class="price">Rs. 200</p>
       <button class="Ordering_button">Order</button>
     </div>
+
+
     <div class="boxes_to_Do" data-food="mula" data-price="90">
       <img src="images/mula.png" alt="Mula ko Acchar">
       <h3>Mula ko Acchar</h3>
@@ -440,7 +442,7 @@
     let total_cost = 0;
     let loco = {};
 
-
+  
 
     document.querySelectorAll(".Ordering_button").forEach(button => {
       const boxes_to_Do = button.closest(".boxes_to_Do");
@@ -469,7 +471,8 @@
         const item = Cart[food];
         const unitPrice = item.total / item.quantity;
         total_cost += item.total;
-        CartBody.innerHTML += `
+  
+      CartBody.innerHTML += `
         <tr>
           <td>${food}</td>
           <td>Rs. ${unitPrice}</td>
@@ -477,7 +480,7 @@
           <td>Rs. ${item.total}</td>
         </tr>
       `;
-      }
+    }
 
       CartTotal.innerText = `Total: Rs. ${total_cost}`
     }

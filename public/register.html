@@ -1,25 +1,278 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>REGISTER HERE</title>
-    <style>
-        footer {
-            background: #004d40;
-            color: #e0f7fa;
-            text-align: center;
-            padding: 18px;
-            margin-top: 30px;
-            }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cloud Kitchen - Business Register</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Playfair Display', serif;
+    }
+
+
+
+    body {
+      background: #e0f7fa;
+      color: #004d40;
+    }
+
+
+    nav {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 50px;
+      height: 70px;
+      background: rgba(0, 150, 136, 0.95);
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      border-bottom: 2px solid #009688;
+      z-index: 1000;
+    }
+
+    .brand-name {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #e0f7fa;
+      letter-spacing: 2px;
+      text-decoration: none;
+    }
+
+    .links-box {
+      display: flex;
+      gap: 35px;
+    }
+
+    .links {
+      position: relative;
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: #e0f7fa;
+      transition: color 0.3s ease, transform 0.2s;
+      padding: 5px 0;
+    }
+
+
+
+    .links::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background: #004d40;
+      transition: width 0.3s ease;
+    }
+
+
+
+    .links:hover {
+      color: #80deea;
+      transform: translateY(-2px);
+    }
+
+
+    .links:hover::after {
+      width: 100%;
+    }
+
+
+
+
+
+
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+
+
+
+    form {
+      max-width: 900px;
+      margin: 50px auto;
+      padding: 40px;
+      border-radius: 25px;
+      background: linear-gradient(270deg, rgba(0,150,136,0.15), rgba(0,188,212,0.15), rgba(0,150,136,0.15));
+      background-size: 400% 400%;
+      animation: gradientMove 10s ease infinite;
+      border: 2px solid transparent;
+      -webkit-backdrop-filter: blur(20px);
+      backdrop-filter: blur(20px);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+      font-weight: 1200;
+      background: linear-gradient(135deg, #004d40, #009688, #26c6da);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    label {
+      font-weight: 600;
+      color: #004d40;
+      font-size: 1.1rem;
+    }
+
+    input,
+     textarea 
+     {
+      padding: 15px;
+      font-size: 1.1rem;
+      border-radius: 12px;
+      border: 1px solid #ccc;
+      background: rgba(255,255,255,0.9);
+      outline: none;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .Images {
+      border: 2px dashed #004d40;
+      border-radius: 12px;
+      padding: 40px;
+      text-align: center;
+      color: #009688;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+      background: rgba(0, 150, 136, 0.05);
+    }
+    .Images.hover {
+      background: rgba(0, 188, 212, 0.1);
+      box-shadow: 0 0 15px #009688;
+    }
+
+    .sumit-Button {
+      padding: 16px;
+      border-radius: 50px;
+      font-size: 1.3rem;
+      font-weight: bold;
+      border: 2px solid transparent;
+      cursor: pointer;
+      color: #e0f7fa;
+      background: transparent;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      transition: all 0.3s ease;
+      align-self: center;
+      width: 180px;
+    }
+
+
+    .sumit-Button::before {
+      content: "";
+      position: absolute;
+      top: -2px; left: -2px; right: -2px; bottom: -2px;
+      background: linear-gradient(270deg, #004d40, #009688, #26c6da, #004d40);
+      background-size: 300% 300%;
+      border-radius: 50px;
+      z-index: -1;
+      animation: gradientMove 4s linear infinite;
+    }
+
+
+
+    .sumit-Button::after {
+      content:"";
+      position: absolute;
+      inset: 2px;
+      background: rgba(0,0,0,0.2);
+      border-radius: 50px;
+      z-index: -1;
+      transition: all 0.3s ease;
+    }
+    .sumit-Button:hover {
+      color: #004d40;
+    }
+    .sumit-Button:hover::after {
+      background: #e0f7fa;
+    }
+  </style>
 </head>
 <body>
+  <nav>
+    <a href="index.html" class="brand-name">Aafano Khaja</a>
+    <div class="links-box">
+      <a href="index.html" class="links">Home</a>
+      <a href="order.html" class="links">Order</a>
+      <a href="register.html" class="links">Register</a>
+      <p class="links">About us</p>
+    </div>
+  </nav>
+
+
+
+  <form>
+    <h1>Register Your Business</h1>
+
+    <label>Business Name</label>
+    <input placeholder="Business name" id="name" required>
+
+
+
+
+
+    <label>Address</label>
+    <input placeholder="Province, District, Municipality, City" id="address" required>
+
+    <label>Street</label>
+    <input placeholder="Street details" id="street" required>
+
+    <label>Phone number</label>
+    <input placeholder="Phone number" id="phone" required>
+
+    <label>Email address</label>
+    <input placeholder="example@gmail.com" id="email" required>
+
+
+
+    <label>Food Images</label>
+    <div class="Images" id="imageDrop">Drag & drop images here or click to select</div>
+
+    <label>Description</label>
+    <textarea placeholder="Brief description about your business..." id="data" required></textarea>
+
+
+    <button type="submit" class="sumit-Button" >Submit</button>
+  </form>
+  <script>
+    
+  </script>
+  
+    
+</body>
+</html>
+
     
     <footer>
     © 2025 Cloud Kitchen. All rights reserved.
   </footer>
 
-  
+
 </body>
 </html>
