@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cloud Kitchen - Order</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Playfair Display', serif;
+      background: #e0f7fa;
+      color: #004d40;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      height: 70px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+      background: rgba(0, 150, 136, 0.95);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      z-index: 1000;
+      padding: 0 50px;
+      border-bottom: 2px solid #009688;
+    }
+
+    .brand-name {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #e0f7fa;
+      letter-spacing: 2px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .brand-name:hover {
+      transform: scale(1.1);
+    }
+
+    .links-box {
+      display: flex;
+      gap: 40px;
+    }
+
+    .links {
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: #e0f7fa;
+      cursor: pointer;
+      position: relative;
+      transition: color 0.3s ease, transform 0.2s;
+    }
+
+    .links::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      left: 0;
+      bottom: -5px;
+      background: #004d40;
+      transition: width 0.3s ease;
+    }
+
+    .links:hover {
+      color: #80deea;
+      transform: translateY(-2px);
+    }
+
+    .links:hover::after {
+      width: 100%;
+    }
+
+    .filter-box {
+      margin: 40px auto 20px;
+      max-width: 1200px;
+      text-align: center;
+    }
+
+    .filter-box h1 {
+      background: linear-gradient(135deg, #004d40, #009688, #26c6da);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 40px;
+      padding: 30px;
+    }
+
+    select {
+      padding: 12px 18px;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      outline: none;
+      cursor: pointer;
+      background: white;
+      transition: border 0.3s;
+    }
+
+    select:hover {
+      border-color: #009688;
+    }
+
+    .box-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: 20px auto 60px;
+      padding: 0 20px;
+    }
+
+    .boxes_to_Do {
+      background: #e0f7fa;
+      border-radius: 15px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      text-align: center;
+      transition: transform 0.3s ease;
+      border: 1px solid #004d40;
+    }
+
+    .boxes_to_Do:hover {
+      transform: translateY(-8px);
+    }
+
+    .boxes_to_Do img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .boxes_to_Do h3 {
+      font-size: 1.4rem;
+      margin: 15px 0 8px;
+      color: #004d40;
+    }
+
+    .boxes_to_Do p {
+      font-size: 0.95rem;
+      color: #004d40;
+      margin: 0 15px 10px;
+    }
+
+    .price {
+      font-size: 1rem;
+      font-weight: bold;
+      color: #009688;
+      margin-bottom: 12px;
+    }
+
+    .Ordering_button {
+      position: relative;
+      display: inline-block;
+      padding: 10px 30px;
+      font-size: 1rem;
+      font-weight: bold;
+      color: #e0f7fa;
+      background: transparent;
+      border: 2px solid transparent;
+      border-radius: 50px;
+      cursor: pointer;
+      overflow: hidden;
+      transition: all 0.4s ease;
+      z-index: 1;
+      margin-bottom: 20px;
+    }
+
+    .Ordering_button::before {
+      content: "";
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(270deg, #004d40, #009688, #26c6da, #004d40);
+      background-size: 300% 300%;
+      border-radius: 50px;
+      z-index: -1;
+      animation: borderFlow 4s linear infinite;
+    }
+
+    .Ordering_button::after {
+      content: "";
+      position: absolute;
+      inset: 2px;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 50px;
+      z-index: -1;
+      transition: all 0.45s ease;
+    }
+
+    .Ordering_button:hover {
+      color: #004d40;
+    }
+
+    .Ordering_button:hover::after {
+      background: #e0f7fa;
+    }
+
+    @keyframes borderFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .Cart {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 20px;
+      background: #e0f7fa;
+      border-radius: 15px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+      border: 1px solid #004d40;
+    }
+
+    .Cart h2 {
+      margin-bottom: 15px;
+      color: #009688;
+    }
+
+    .Cart table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .Cart th, .Cart td {
+      padding: 12px;
+      text-align: center;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .Cart th {
+      background: #b2dfdb;
+      color: #004d40;
+    }
+
+    .Cart-total {
+      text-align: right;
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin-top: 15px;
+      color: #009688;
+    }
+
+    .confirm-btn {
+      display: block;
+      margin: 20px auto 0;
+      padding: 12px 40px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      border-radius: 50px;
+      border: none;
+      background: linear-gradient(135deg, #004d40, #009688);
+      color: white;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .confirm-btn:hover {
+      transform: scale(1.05);
+    }
+
+    footer {
+      background: #004d40;
+      color: #e0f7fa;
+      text-align: center;
+      padding: 18px;
+      margin-top: 30px;
+    }
+
+    .single-boxes_to_Do {
+      grid-template-columns: repeat(auto-fit, minmax(250px, 300px)) !important;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html" class="brand-name">Aafano Khaja</a>
+    <div class="links-box">
+      <a href="index.html" class="links">Home</a>
+      <a href="try3.html" class="links">Order</a>
+      <a href="try2.html" class="links">Register</a>
+      <p class="links">About us</p>
+    </div>
+  </nav>
+
+  <section class="filter-box">
+    <h1>Choose what you want to eat.</h1>
+    <select title="food selector" id="food-filter">
+      <option value="all">All Foods</option>
+      <option value="kheer">Kheer</option>
+      <option value="dhido">Dhido</option>
+      <option value="phapar">Phapar ko Roti</option>
+      <option value="choila">Chicken Choila</option>
+      <option value="roti">Fini Roti</option>
+      <option value="lassi">Lassi</option>
+      <option value="gundruk">Gundruk</option>
+      <option value="mula">Mula ko Acchar</option>
+    </select>
+  </section>
+
+  <section class="box-container">
+    <div class="boxes_to_Do" data-food="kheer" data-price="150">
+      <img src="images/kheer.png" alt="Kheer">
+      <h3>Kheer</h3>
+      <p>Sweet Nepali rice pudding flavored with boxes_to_Doamom and nuts.</p>
+      <p class="price">Rs. 150</p>
+      <button class="Ordering_button">Order</button>
+    </div>
+    <div class="boxes_to_Do" data-food="dhido" data-price="250">
+      <img src="images/dhedo.png" alt="Dhido">
+      <h3>Dhido</h3>
+      <p>Traditional Nepali staple made with buckwheat or millet flour.</p>
+      <p class="price">Rs. 250</p>
+      <button class="Ordering_button">Order</button>
+    </div>
+    <div class="boxes_to_Do" data-food="phapar" data-price="120">
+      <img src="images/phapar.png" alt="Phapar ko Roti">
+      <h3>Phapar ko Roti</h3>
+      <p>Buckwheat flatbread, the local and original type.</p>
+      <p class="price">Rs. 120</p>
+      <button class="Ordering_button">Order</button>
+    </div>
+    <div class="boxes_to_Do" data-food="choila" data-price="300">
+      <img src="images/chic.png" alt="Chicken Choila">
+      <h3>Chicken Choila</h3>
+      <p>Spicy grilled chicken, a favorite among Nepali appetizers.</p>
+      <p class="price">Rs. 300</p>
+      <button class="Ordering_button">Order</button>
+    </div>
+    <div class="boxes_to_Do" data-food="roti" data-price="100">
+      <img src="images/fine.png" alt="Fine Roti">
+      <h3>Fini Roti</h3>
+      <p>Soft wheat-based flatbread enjoyed with curries and vegetables.</p>
+      <p class="price">Rs. 100</p>
+      <button class="Ordering_button">Order</button>
+    </div>
+    <div class="boxes_to_Do" data-food="lassi" data-price="80">
+      <img src="images/lassi.png" alt="Lassi">
+      <h3>Lassi</h3>
+      <p>Refreshing yogurt-based drink with bananas, sweetened or salted.</p>
+      <p class="price">Rs. 80</p>
+      <button class="Ordering_button">Order</button>
+    </div>
+    <div class="boxes_to_Do" data-food="gundruk" data-price="200">
+      <img src="images/gundruk.png" alt="Gundruk">
+      <h3>Gundruk</h3>
+      <p>Fermented leafy green vegetable, a signature original.</p>
+      <p class="price">Rs. 200</p>
+      <button class="Ordering_button">Order</button>
+    </div>
+    <div class="boxes_to_Do" data-food="mula" data-price="90">
+      <img src="images/mula.png" alt="Mula ko Acchar">
+      <h3>Mula ko Acchar</h3>
+      <p>Spicy radish pickle for making a whole meal taster.</p>
+      <p class="price">Rs. 90</p>
+      <button class="Ordering_button">Order</button>
+    </div>
+  </section>
+
+  <section class="Cart">
+    <h2>Your Cart</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Food</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Subtotal</th>
+        </tr>
+      </thead>
+      <tbody id="Cart-body"></tbody>
+    </table>
+    <div class="Cart-total" id="Cart-total">Total: Rs. 0</div>
+    <button class="confirm-btn" onclick="Clear()">Confirm Order</button>
+  </section>
+
+  <footer>
+    © 2025 Cloud Kitchen. All rights reserved.
+  </footer>
+
+  <script>
+  const filter = document.getElementById("food-filter");
+  const boxes_to_Dos = document.querySelectorAll(".boxes_to_Do");
+  const container = document.querySelector(".boxes_to_Dos-container");
+  const CartBody = document.getElementById("Cart-body");
+  const CartTotal = document.getElementById("Cart-total")
+
+  let Cart = {};
+  let total_cost = 0;
+  let loco = {};
+
+  document.querySelectorAll(".Ordering_button").forEach(button => {
+    const boxes_to_Do = button.closest(".boxes_to_Do");
+    const foodName = boxes_to_Do.querySelector("h3").innerText
+    const price = parseInt(boxes_to_Do.dataset.price)
+    button.setAttribute("onclick", `addToCart("${foodName}", ${price})`)
+  });
+
+  function addToCart(food, price) {
+    if (!Cart[food]) {
+      Cart[food] = { quantity: 1, total: price };
+    } else {
+      Cart[food].quantity += 1;
+      Cart[food].total += price;
+    }
+    updateCart();
+  }
+
+  function updateCart() {
+    CartBody.innerHTML = ""
+    total_cost = 0;
+
+    for (let food in Cart) {
+      const item = Cart[food];
+      const unitPrice = item.total / item.quantity;
+      total_cost += item.total;
+      CartBody.innerHTML += `
+        <tr>
+          <td>${food}</td>
+          <td>Rs. ${unitPrice}</td>
+          <td>${item.quantity}</td>
+          <td>Rs. ${item.total}</td>
+        </tr>
+      `;
+    }
+
+    CartTotal.innerText = `Total: Rs. ${total_cost}`
+  }
+
+  function Clear() {
+    SENDDATA();
+    Cart = {}
+    updateCart();
+  }
+
+  function getLoc() {
+    navigator.geolocation.getCurrentPosition(pos => {
+      loco = {  lat: pos.coords.latitude,long: pos.coords.longitude };
+    })
+  }
+
+
+
+  getLoc();
+
+
+
+
+  async function SENDDATA() {
+    const data = { message: Cart, Final: total_cost, location: loco };
+    await fetch("/api/order", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    });
+  }
+
+  filter.addEventListener("change", () => {
+    const value = filter.value
+    let visibleboxes_to_Dos = 0
+
+    boxes_to_Dos.forEach(boxes_to_Do => {
+      if (value === "all" || boxes_to_Do.dataset.food === value) {
+        boxes_to_Do.style.display = "block"
+        visibleboxes_to_Dos++;
+      } else {
+        boxes_to_Do.style.display = "none";
+      }
+    });
+
+    if (visibleboxes_to_Dos === 1) container.classList.add("single-boxes_to_Do")
+    else container.classList.remove("single-boxes_to_Do")
+  })
+  </script>
+</body>
+</html>
